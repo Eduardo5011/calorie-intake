@@ -1,6 +1,7 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useCookies } from "react-cookie";
 import "./navbar.css";
 
 import useLogout from "../../hooks/useLogout";
@@ -9,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 
 const Navbar = () => {
+  const [cookies, setCookies] = useCookies(["access_token"]); //cookies
   
   const navRef = useRef();
 
@@ -22,7 +24,7 @@ const Navbar = () => {
 
   const signOut = async () => {
     
-   
+    setCookies("access_token", ""); /// cookies
     await logout();
     navigate("/login");
   }
@@ -47,15 +49,17 @@ const Navbar = () => {
           My Favorites
         </Link>
         
-        
-        {/* <Link as={Link} to="/register">
+        {!cookies.access_token ? (
+        <Link as={Link} to="/register">
           Register
-        </Link> */}
-      
+        </Link>
+        ):(
+      <>
         <button onClick={signOut}>
           Logout
         </button>
-        
+        </>
+        )}
         <button className="nav-btn nav-close-btn" onClick={showNavbar}>
           <FaTimes />
         </button>
