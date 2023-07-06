@@ -24,7 +24,7 @@ const Navbar = () => {
 
   const signOut = async () => {
     
-    setCookies("access_token", ""); /// cookies
+  
     await logout();
     navigate("/login");
   }
@@ -49,17 +49,16 @@ const Navbar = () => {
           My Favorites
         </Link>
         
-        {!cookies.access_token ? (
-        <Link as={Link} to="/register">
+        {/* <Link as={Link} to="/register">
           Register
-        </Link>
-        ):(
-      <>
+        </Link> */}
+        
+      
         <button onClick={signOut}>
           Logout
         </button>
-        </>
-        )}
+        
+        
         <button className="nav-btn nav-close-btn" onClick={showNavbar}>
           <FaTimes />
         </button>
