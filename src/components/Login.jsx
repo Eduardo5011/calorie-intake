@@ -1,12 +1,12 @@
 import { useRef, useState, useEffect } from "react";
 import useAuth from "../hooks/useAuth";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 import axios from "./api/axios";
 import { ToastContainer, toast } from "react-toastify";
 
 const LOGIN_URL = "/auth";
-
 
 const Login = () => {
   const { setAuth } = useAuth();
@@ -21,7 +21,8 @@ const Login = () => {
   const [user, setUser] = useState("");
   const [pwd, setPwd] = useState("");
   const [errMsg, setErrMsg] = useState("");
- 
+  // eslint-disable-next-line no-unused-vars
+  const [_, setCookies] = useCookies(["access_token"]);
 
   useEffect(() => {
     userRef.current.focus();
@@ -45,9 +46,11 @@ const Login = () => {
       );
       // console.log(JSON.stringify(response?.data));
       //console.log(JSON.stringify(response));
+
       const accessToken = response?.data?.accessToken;
       const roles = response?.data?.roles;
       setAuth({ user, pwd, roles, accessToken });
+      setCookies("access_token", response?.data?.accessToken);
       setUser("");
       setPwd("");
       navigate(from, { replace: true });
@@ -64,9 +67,6 @@ const Login = () => {
       errRef.current.focus();
     }
   };
-  
-  
-
 
   const notify = () =>
     toast("You are logged in!", {
@@ -111,7 +111,7 @@ const Login = () => {
           required
         />
         <button onClick={notify}>Sign In</button>
-        
+
         <ToastContainer
           position="top-right"
           autoClose={5000}
@@ -131,8 +131,6 @@ const Login = () => {
         <span className="line">
           {/*put router link here*/}
           <a href="/register">Sign Up</a>
-          
-          
         </span>
       </p>
     </section1>

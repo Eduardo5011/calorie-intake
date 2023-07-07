@@ -7,38 +7,29 @@ import "./navbar.css";
 import useLogout from "../../hooks/useLogout";
 import { useNavigate } from "react-router-dom";
 
-
-
 const Navbar = () => {
   const [cookies, setCookies] = useCookies(["access_token"]); //cookies
-  
+
   const navRef = useRef();
 
   const showNavbar = () => {
     navRef.current.classList.toggle("responsive_nav");
   };
 
-
   const navigate = useNavigate();
+
   const logout = useLogout();
 
   const signOut = async () => {
-    
-  
+    setCookies("access_token", "");
     await logout();
     navigate("/login");
-  }
-
-
+  };
 
   return (
-    
     <header>
       <h3 to="/home">Logo</h3>
       <nav ref={navRef}>
-
-     
-
         <Link as={Link} to="/home">
           Home
         </Link>
@@ -48,17 +39,16 @@ const Navbar = () => {
         <Link as={Link} to="/savedItems">
           My Favorites
         </Link>
-        
-        {/* <Link as={Link} to="/register">
-          Register
-        </Link> */}
-        
-      
-        <button onClick={signOut}>
-          Logout
-        </button>
-        
-        
+        {!cookies.access_token ? (
+          <Link as={Link} to="/register">
+            Login/Register
+          </Link>
+        ) : (
+          <>
+            <button onClick={signOut}>Logout</button>
+          </>
+        )}
+
         <button className="nav-btn nav-close-btn" onClick={showNavbar}>
           <FaTimes />
         </button>
@@ -70,5 +60,3 @@ const Navbar = () => {
   );
 };
 export default Navbar;
-
-
