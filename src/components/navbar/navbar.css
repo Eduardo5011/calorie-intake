@@ -47,7 +47,14 @@ header .nav-btn {
     visibility: hidden;
     opacity: 0;
     font-size: 1.8rem;
+   
 }
+
+.home {
+    text-decoration: none;
+}
+
+
 
 @media only screen and (max-width: 1024px) {
     header .nav-btn {
@@ -86,3 +93,4 @@ header .nav-btn {
     }
 
 }
+

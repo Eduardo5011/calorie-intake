@@ -28,9 +28,9 @@ const Navbar = () => {
 
   return (
     <header>
-      <h3 to="/home">Logo</h3>
+      <Link className="home" as={Link} to="/home">Calories</Link>
       <nav ref={navRef}>
-        <Link as={Link} to="/home">
+        <Link as={Link} to="/login">
           Home
         </Link>
         <Link as={Link} to="/mealInput">

@@ -8,12 +8,6 @@ html {
     color: #fff;
 }
 
-body {
-   
-    background-image: url("../images/veggies.jpg");
-    background-repeat: fixed;
-    
-}
 
 .App {
   display: flex;
