@@ -1,6 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
 
-
+body {
+   
+  background-image: url("../src/images/veggies.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+}
 
 html {
     font-family: 'Nunito', sans-serif;
