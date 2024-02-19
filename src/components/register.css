@@ -2,7 +2,7 @@
 
 body {
    
-  background-image: url("../src/images/veggies.jpg");
+    background-image: url("/images/veggies.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   
