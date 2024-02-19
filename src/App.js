@@ -13,10 +13,12 @@ import Layout from "./components/Layout";
 import Missing from "./components/Missing";
 import MealInput from "./components/meal/MealInput";
 // import Logout from "./components/Logout";
+import {RecipesProvider} from './context/RecipesContext'
 
 function App() {
   return (
     <div>
+      <RecipesProvider>
       <BrowserRouter>
         <Navbar />
         <Routes>
@@ -35,6 +37,7 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
+      </RecipesProvider>
     </div>
   );
 }

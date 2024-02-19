@@ -1,8 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { RecipesContext } from '../../contexts/RecipesContext';
 
 
 const Meal = ({ meal }) => {
   const [imageUrl, setImageUrl] = useState("");
+  const { addMeal } = useContext(RecipesContext);
 
   useEffect(() => {
     fetch(
@@ -29,6 +31,7 @@ const Meal = ({ meal }) => {
       <a className="text" target="_blank" rel="noreferrer" href={meal.sourceUrl}>
         Go to recipe
       </a>
+      <button onClick={() => addMeal(meal)}>Add to Saved</button>
     </article>
   );
 };
