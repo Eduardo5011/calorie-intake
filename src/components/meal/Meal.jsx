@@ -6,6 +6,10 @@ const Meal = ({ meal }) => {
   const [imageUrl, setImageUrl] = useState("");
   const { addMeal } = useContext(RecipesContext );
 
+  const handleSave = () => {
+    addMeal(meal)
+  }
+
   useEffect(() => {
     fetch(
       `https://api.spoonacular.com/recipes/${meal.id}/information?apiKey=${process.env.REACT_APP_API_KEY}&includeNutrition=false
@@ -31,7 +35,7 @@ const Meal = ({ meal }) => {
       <a className="text" target="_blank" rel="noreferrer" href={meal.sourceUrl}>
         Go to recipe
       </a>
-      <button className="text" onClick={() => addMeal(meal)}>Add to Saved</button>
+      <button className="text" onClick={handleSave}>Add to Saved</button>
     </article>
   );
 };
