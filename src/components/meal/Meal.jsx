@@ -1,10 +1,10 @@
 import { useState, useEffect, useContext } from "react";
-import { RecipesContext } from '../../contexts/RecipesContext';
+import {RecipesProvider} from '../../context/RecipesContext'
 
 
 const Meal = ({ meal }) => {
   const [imageUrl, setImageUrl] = useState("");
-  const { addMeal } = useContext(RecipesContext);
+  const { addMeal } = useContext(RecipesProvider);
 
   useEffect(() => {
     fetch(
