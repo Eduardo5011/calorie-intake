@@ -1,5 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import {RecipesContext } from '../../context/RecipesContext'
+import {  toast } from "react-toastify";
+
 
 
 const Meal = ({ meal }) => {
@@ -7,7 +9,8 @@ const Meal = ({ meal }) => {
   const { addMeal } = useContext(RecipesContext );
 
   const handleSave = () => {
-    addMeal(meal)
+    addMeal(meal);
+    toast.success("Meal added to saved items!");
   }
 
   useEffect(() => {
@@ -18,11 +21,14 @@ const Meal = ({ meal }) => {
       .then((response) => response.json())
       .then((data) => {
         setImageUrl(data.image);
+        console.log(data);
       })
       .catch(() => {
         console.log("error");
       });
   }, [meal.id]);
+
+ 
 
   return (
     <article>
@@ -36,6 +42,7 @@ const Meal = ({ meal }) => {
         Go to recipe
       </a>
       <button className="text" onClick={handleSave}>Add to Saved</button>
+     
     </article>
   );
 };

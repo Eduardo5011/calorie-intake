@@ -16,6 +16,10 @@ const Navbar = () => {
     navRef.current.classList.toggle("responsive_nav");
   };
 
+  const handleNavClick = () => {
+    navRef.current.classList.remove("responsive_nav");
+  };
+
   const navigate = useNavigate();
 
   const logout = useLogout();
@@ -28,24 +32,24 @@ const Navbar = () => {
 
   return (
     <header>
-      <Link className="home" as={Link} to="/home">Calories</Link>
+      <Link className="home" as={Link} to="/home" onClick={handleNavClick}>Calories</Link>
       <nav ref={navRef}>
         <Link as={Link} to="/login">
           Home
         </Link>
-        <Link as={Link} to="/mealInput">
+        <Link as={Link} to="/mealInput" onClick={handleNavClick}>
           Meals
         </Link>
-        <Link as={Link} to="/savedItems">
+        <Link as={Link} to="/savedItems" onClick={handleNavClick}>
           My Favorites
         </Link>
         {!cookies.access_token ? (
-          <Link as={Link} to="/register">
+          <Link as={Link} to="/register" onClick={handleNavClick}>
             Login/Register
           </Link>
         ) : (
           <>
-            <button onClick={signOut}>Logout</button>
+            <button onClick={() => { signOut(); handleNavClick(); }}>Logout</button>
           </>
         )}
 

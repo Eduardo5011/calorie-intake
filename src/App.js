@@ -14,6 +14,8 @@ import Missing from "./components/Missing";
 import MealInput from "./components/meal/MealInput";
 // import Logout from "./components/Logout";
 import {RecipesProvider} from './context/RecipesContext'
+import { ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
@@ -37,6 +39,18 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
+      <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+        />
       </RecipesProvider>
     </div>
   );

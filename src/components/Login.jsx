@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useCookies } from "react-cookie";
 
 import axios from "./api/axios";
-import { ToastContainer, toast } from "react-toastify";
+import {  toast } from "react-toastify";
 
 const LOGIN_URL = "/auth";
 
@@ -53,23 +53,28 @@ const Login = () => {
       setCookies("access_token", response?.data?.accessToken);
       setUser("");
       setPwd("");
+      notify("Login successfully");
       navigate(from, { replace: true });
     } catch (err) {
       if (!err?.response) {
         setErrMsg("No Server Response");
+        notify("No server response.", "error");
       } else if (err.response?.status === 400) {
         setErrMsg("Missing Username or Password");
+        notify("Missing username or password.", "error");
       } else if (err.response?.status === 401) {
         setErrMsg("Unauthorized");
+        notify("Unauthorized access. Check your credentials.", "error");
       } else {
         setErrMsg("Login Failed");
+        notify("Login failed. Please try again.", "error");
       }
       errRef.current.focus();
     }
   };
 
-  const notify = () =>
-    toast("You are logged in!", {
+  const notify = (message, type) => {
+    toast(message, {
       position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,
@@ -78,7 +83,9 @@ const Login = () => {
       draggable: true,
       progress: undefined,
       theme: "dark",
+      type: type, // "success", "error", etc.
     });
+  };
 
   return (
     <section1>
@@ -110,20 +117,9 @@ const Login = () => {
           value={pwd}
           required
         />
-        <button onClick={notify}>Sign In</button>
+        <button>Sign In</button>
 
-        <ToastContainer
-          position="top-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="dark"
-        />
+        
       </form>
       <p>
         Need an Account?
